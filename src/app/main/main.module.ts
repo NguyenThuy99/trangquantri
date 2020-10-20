@@ -36,7 +36,7 @@ export const mainRoutes: Routes = [
         data: { roles: [Role.Admin] },
       },
       {
-        path: 'tintuc',
+        path: 'quanly',
         loadChildren: () =>
           import('./tintuc/tintuc.module').then((m) => m.TintucModule),
         canActivate: [RoleGuard],

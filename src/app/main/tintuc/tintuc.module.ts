@@ -16,7 +16,8 @@ const routes: Routes = [
   declarations: [TinTucComponent],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    RouterModule.forChild(routes)
     
   ]
 })
