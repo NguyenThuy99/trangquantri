@@ -1,15 +1,16 @@
-import { Component, OnInit, Injector, ViewChild } from '@angular/core';
+import { Component, OnInit,Injector, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FileUpload } from 'primeng/fileupload';
-import { Observable } from 'rxjs-compat';
+import { Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/lib/base-component';
 declare var $: any;
+
 @Component({
-  selector: 'app-tintuc',
-  templateUrl: './tintuc.component.html',
-  styleUrls: ['./tintuc.component.css']
+  selector: 'app-chude',
+  templateUrl: './chude.component.html',
+  styleUrls: ['./chude.component.css']
 })
-export class TinTucComponent extends BaseComponent implements OnInit {
+export class ChudeComponent extends BaseComponent implements OnInit {
 
   constructor(injector: Injector, private fb: FormBuilder) {
     super(injector);
@@ -17,16 +18,15 @@ export class TinTucComponent extends BaseComponent implements OnInit {
 
   formData: any;
   message: any;
+
   tieude: any;
-  idloai: any;
-  mota: any;
-  hinhanh: any;
+  idcd: any;
   ngaydang: any;
   noidung: any;
 
-  tintucs: any;
-  tintuc: any;
-  loai: any
+  chudes: any;
+  chude: any;
+  loaichude: any
 
   @ViewChild(FileUpload, { static: false }) file_image: FileUpload;
   ngOnInit(): void {
@@ -34,31 +34,29 @@ export class TinTucComponent extends BaseComponent implements OnInit {
     this.formData = this.fb.group({
       id: [''],
       tieude: ['', Validators.required],
-      idloai: [''],
-      mota: [''],
-      hinhanh: [''],
+      idcd: [''],
       // ngaydang: [''],
       noidung: ['']
 
     });
     Observable.combineLatest(
-      this._api.get('api/tintuc/get-all'),
+      this._api.get('api/chude/get-all-chude'),
 
     ).takeUntil(this.unsubscribe).subscribe(
       res => {
-        this.tintucs = res[0];
-        console.log(this.tintucs);
+        this.chudes = res[0];
+        console.log(this.chudes);
 
       }, err => { })
 
 
     Observable.combineLatest(
-      this._api.get('api/loaitin/get-all-loai'),
+      this._api.get('api/loaichude/get-all-loaichude'),
 
     ).takeUntil(this.unsubscribe).subscribe(
       res => {
-        this.loai = res[0];
-        console.log(this.loai);
+        this.loaichude = res[0];
+        console.log(this.loaichude);
 
       }, err => { })
   }
@@ -67,30 +65,29 @@ export class TinTucComponent extends BaseComponent implements OnInit {
 
   view(id: any) {
     Observable.combineLatest(
-      this._api.get('api/tintuc/get-by-id/' + id)
+      this._api.get('api/chude/get-by-id/' + id)
     ).takeUntil(this.unsubscribe).subscribe(
       res => {
-        this.tintuc = res[0];
+        this.chude = res[0];
         setTimeout(() => {
-          this.formData.controls['id'].setValue(this.tintuc.id);
-          this.formData.controls['tieude'].setValue(this.tintuc.tieude);
-          this.formData.controls['noidung'].setValue(this.tintuc.noidung);
-          this.formData.controls['mota'].setValue(this.tintuc.mota);
-          this.formData.controls['idloai'].setValue(this.tintuc.idloai);
+          this.formData.controls['id'].setValue(this.chude.id);
+          this.formData.controls['tieude'].setValue(this.chude.tieude);
+          this.formData.controls['noidung'].setValue(this.chude.noidung);
+          this.formData.controls['idcd'].setValue(this.chude.idcd);
 
           $(".modal-title").html("Xem chi tiết sản phẩm");
           $('#formModal').modal('toggle');
-          console.log(this.tintuc)
+          console.log(this.chude)
         });
       })
   }
 
   delete(id: any) {
     Observable.combineLatest(
-      this._api.get('api/tintuc/delete-tintuc/' + id)
+      this._api.get('api/chude/delete-chude/' + id)
     ).takeUntil(this.unsubscribe).subscribe(
       res => {
-        this.tintucs = this.tintucs.filter(val => val.id !== id);
+        this.chudes = this.chudes.filter(val => val.id !== id);
         alert('Xóa thành công!');
       }
     )
@@ -137,8 +134,8 @@ export class TinTucComponent extends BaseComponent implements OnInit {
       this.formData.controls['id'].setValue(null);
       this.formData.controls['tieude'].setValue(null);
       this.formData.controls['noidung'].setValue(null);
-      this.formData.controls['mota'].setValue(null);
-      this.formData.controls['idloai'].setValue(null);
+      
+      this.formData.controls['idcd'].setValue(null);
 
       $(".modal-title").html("Thêm sản phẩm");
       $('#formModal').modal('toggle');
@@ -152,17 +149,14 @@ export class TinTucComponent extends BaseComponent implements OnInit {
 
     console.log(value);
     this.getEncodeFromImage(this.file_image).subscribe((data: any): void => {
-      let data_image = data == '' ? null : data;
-      this._api.post('api/tintuc/create-tintuc', {
+      // let data_image = data == '' ? null : data;
+      this._api.post('api/chude/create-chude', {
         tieude: value.tieude,
-        idloai: +value.idloai,
-        mota: value.mota,
-        hinhanh: data_image,
-
+        idcd: +value.idcd,
         noidung: value.noidung,
       }).takeUntil(this.unsubscribe).subscribe((res) => {
         this.message = res;
-        this.tintucs.unshift(this.message);
+        this.chudes.unshift(this.message);
         $("#formModal").modal('hide');
         alert('Thêm thành công!');
       });
@@ -186,14 +180,14 @@ export class TinTucComponent extends BaseComponent implements OnInit {
       this._api.get('api/tintuc/get-by-id/' + id)
     ).subscribe(
       res => {
-        this.tintuc = res[0];
-        console.log(this.tintuc);
-        this.idloai = this.tintuc.idloai;
+        this.chude = res[0];
+        console.log(this.chude);
+        this.idcd = this.chude.idcd;
         setTimeout(() => {
-          this.formData.controls['id'].setValue(this.tintuc.id);
-          this.formData.controls['tieude'].setValue(this.tintuc.tieude);
-          this.formData.controls['mota'].setValue(this.tintuc.mota);
-          this.formData.controls['noidung'].setValue(this.tintuc.noidung);
+          this.formData.controls['id'].setValue(this.chude.id);
+          this.formData.controls['tieude'].setValue(this.chude.tieude);
+          
+          this.formData.controls['noidung'].setValue(this.chude.noidung);
           $(".modal-title").html("Sửa sản phẩm");
           $('#formModal').modal('toggle');
           //  this.formData.reset();

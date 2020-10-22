@@ -41,7 +41,7 @@
                             <th style="width: 1%">
                                 STT
                             </th>
-                            <th style="width: 20%">
+                            <th style="width: 15%">
                                 Tiêu đề
                             </th>
                             <th style="width: 20%">
@@ -50,7 +50,7 @@
                             <th>
                                Nội dung
                             </th>
-                            <th style="width: 8%" class="text-center">
+                            <th style="width: 15%" class="text-center">
                                 Mô tả
                             </th>
                             <th style="width: 25%"> Thao tác
@@ -64,17 +64,21 @@
                                 <td>
                                     {{ i +  1}}
                                 </td>
+                                
                                 <td>
                                     {{item.tieude}}
                                 </td>
                                 <td>
-                                    {{item.mota}}
+                                    {{item.hinhanh}}
                                 </td>
                                 <td>
+                                    {{catText(item.noidung,150)}}
                                 </td>
-                                <td class="project-state">
-                                    <span class="badge badge-success">Success</span>
+                                <td>
+                                    {{catText(item.mota,100)}}
                                 </td>
+                               
+                               
                                 <td class="project-actions text-left">
                                     <a class="btn btn-primary btn-sm" (click)="view(item.id)"  >
                                         <i class="fas fa-eye">
@@ -124,7 +128,7 @@
                     </div>
                     <div class="form-group">
                         <label for=""> Nội dung</label>
-                        <textarea formControlName="noidung" class="form-control" cols="6" rows="5"></textarea>
+                        <textarea formControlName="noidung" class="form-control" cols="6" rows="5" ></textarea>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label no-padding-right"> Hình ảnh</label>

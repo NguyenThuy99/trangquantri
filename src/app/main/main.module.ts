@@ -42,6 +42,7 @@ export const mainRoutes: Routes = [
         canActivate: [RoleGuard],
         data: { roles: [Role.Admin, Role.User] },
       },
+      
     ],
   },
 ];
