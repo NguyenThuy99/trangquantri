@@ -43,7 +43,7 @@ export class TkbComponent extends BaseComponent implements OnInit {
     ).takeUntil(this.unsubscribe).subscribe(
       res => {
         this.tkbs = res[0];
-        console.log(this.tkb);
+        console.log(this.tkbs);
 
       }, err => { })  
   }
@@ -79,7 +79,6 @@ export class TkbComponent extends BaseComponent implements OnInit {
       }
     )
   }
-
 
   //Show modal
   create() {

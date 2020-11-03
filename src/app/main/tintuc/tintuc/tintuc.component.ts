@@ -43,7 +43,6 @@ export class TinTucComponent extends BaseComponent implements OnInit {
     });
     Observable.combineLatest(
       this._api.get('api/tintuc/get-all'),
-
     ).takeUntil(this.unsubscribe).subscribe(
       res => {
         this.tintucs = res[0];
@@ -59,7 +58,6 @@ export class TinTucComponent extends BaseComponent implements OnInit {
       res => {
         this.loai = res[0];
         console.log(this.loai);
-
       }, err => { })
   }
 
@@ -95,41 +93,6 @@ export class TinTucComponent extends BaseComponent implements OnInit {
       }
     )
   }
-
-  // update(id: any) {
-
-  //   Observable.combineLatest(
-  //     this._api.get('api/tintuc/get-by-id/' + id)
-  //   ).takeUntil(this.unsubscribe).subscribe(
-  //     res => {
-  //       this.tintuc = res[0];
-  //       console.log(this.tintuc);
-  //       setTimeout(() => {
-  //         $("#updateModal").modal("toggle");
-  //       });
-
-  //     }
-  //   )
-  // }
-
-  // updateTintuc(id: any, value: any) {
-
-  //   Observable.combineLatest(
-  //     this._api.put('api/tintuc/update-tintuc' + id, {
-  //       tieude: value.tieude,
-  //       idloai: value.idloai,
-  //       mota: +value.mota,
-  //       hinahanh: +value.hinhanh,
-  //       ngaydang: +value.ngaydang,
-  //       noidung: value.noidung,
-  //     })
-  //   ).takeUntil(this.unsubscribe).subscribe(
-  //     res => {
-
-  //     }
-  //   )
-  // }
-
 
   //Show modal
   create() {

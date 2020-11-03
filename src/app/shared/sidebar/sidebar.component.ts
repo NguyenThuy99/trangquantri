@@ -14,7 +14,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     {name:'Quản lý chủ đề',url:'/quanly/chude'},
     {name:'Quản lý loai chủ đề',url:'/quanly/loaichude'},
     {name:'Quản lý thực đơn',url:'/quanly/thucdon'},
-    {name:'Quản lý thời khóa biểu',url:'/quanly/tkb'}
+    {name:'Quản lý thời khóa biểu',url:'/quanly/tkb'},
+    {name:'Quản lý thời quảng cáo',url:'/quanly/quangcao'}
   ]}
   ];
     constructor() { } 

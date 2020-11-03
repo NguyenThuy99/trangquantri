@@ -10,6 +10,7 @@ import { ChudeComponent } from './chude/chude.component';
 import { LoaichudeComponent } from './loaichude/loaichude.component';
 import { ThucdonComponent } from './thucdon/thucdon.component';
 import { TkbComponent } from './tkb/tkb.component';
+import { QuangcaoComponent } from './quangcao/quangcao.component';
 
 const routes: Routes = [
   {
@@ -35,10 +36,14 @@ const routes: Routes = [
   {
     path: 'tkb',
     component: TkbComponent
+  } ,
+  {
+    path: 'quangcao',
+    component: QuangcaoComponent
   } 
 ];
 @NgModule({
-  declarations: [TinTucComponent, LoaitinComponent,ChudeComponent,LoaichudeComponent, ThucdonComponent, TkbComponent],
+  declarations: [TinTucComponent, LoaitinComponent,ChudeComponent,LoaichudeComponent, ThucdonComponent, TkbComponent, QuangcaoComponent],
   imports: [
     CommonModule,
     SharedModule,
