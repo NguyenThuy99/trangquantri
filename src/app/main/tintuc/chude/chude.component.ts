@@ -75,7 +75,7 @@ export class ChudeComponent extends BaseComponent implements OnInit {
           this.formData.controls['noidung'].setValue(this.chude.noidung);
           this.formData.controls['idcd'].setValue(this.chude.idcd);
 
-          $(".modal-title").html("Xem chi tiết sản phẩm");
+          $(".modal-title").html("Xem chi tiết chủ đề");
           $('#formModal').modal('toggle');
           console.log(this.chude)
         });
@@ -177,7 +177,7 @@ export class ChudeComponent extends BaseComponent implements OnInit {
 
 
     Observable.combineLatest(
-      this._api.get('api/tintuc/get-by-id/' + id)
+      this._api.get('api/chude/get-by-id/' + id)
     ).subscribe(
       res => {
         this.chude = res[0];

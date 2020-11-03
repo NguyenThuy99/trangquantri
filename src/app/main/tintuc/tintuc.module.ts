@@ -8,6 +8,8 @@ import { from } from 'rxjs';
 import { LoaitinComponent } from './loaitin/loaitin.component';
 import { ChudeComponent } from './chude/chude.component';
 import { LoaichudeComponent } from './loaichude/loaichude.component';
+import { ThucdonComponent } from './thucdon/thucdon.component';
+import { TkbComponent } from './tkb/tkb.component';
 
 const routes: Routes = [
   {
@@ -25,10 +27,18 @@ const routes: Routes = [
   {
     path: 'chude',
     component: ChudeComponent
+  } ,
+  {
+    path: 'thucdon',
+    component: ThucdonComponent
+  } ,
+  {
+    path: 'tkb',
+    component: TkbComponent
   } 
 ];
 @NgModule({
-  declarations: [TinTucComponent, LoaitinComponent,ChudeComponent,LoaichudeComponent],
+  declarations: [TinTucComponent, LoaitinComponent,ChudeComponent,LoaichudeComponent, ThucdonComponent, TkbComponent],
   imports: [
     CommonModule,
     SharedModule,

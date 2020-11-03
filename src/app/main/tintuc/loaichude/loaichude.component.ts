@@ -36,14 +36,14 @@ export class LoaichudeComponent extends BaseComponent implements OnInit {
     }
     view(id: any) {
       Observable.combineLatest(
-        this._api.get('api/chude/get-by-id/' + id)
+        this._api.get('api/loaichude/get-by-id-loaichude/' + id)
       ).takeUntil(this.unsubscribe).subscribe(
         res => {
           this.loaichude = res[0];
           setTimeout(() => {
             this.formData.controls['id'].setValue(this.loaichude.id);
             this.formData.controls['tenchude'].setValue(this.loaichude.tenchude);
-            $(".modal-title").html("Xem chi tiết sản phẩm");
+            $(".modal-title").html("Xem chi tiết loại chủ đề");
             $('#formModal').modal('toggle');
             console.log(this.loaichude)
           });
@@ -51,7 +51,7 @@ export class LoaichudeComponent extends BaseComponent implements OnInit {
     }
     delete(id: any) {
       Observable.combineLatest(
-        this._api.get('api/chude/delete-loaichude/' + id)
+        this._api.get('api/loaichude/delete-loaichude/' + id)
       ).takeUntil(this.unsubscribe).subscribe(
         res => {
           this.loaichudes = this.loaichudes.filter(val => val.id !== id);
@@ -76,10 +76,8 @@ export class LoaichudeComponent extends BaseComponent implements OnInit {
       console.log(value);
       // this.getEncodeFromImage(this.file_image).subscribe((data: any): void => {
         // let data_image = data == '' ? null : data;
-        this._api.post('api/chude/create-chude', {
-          tieude: value.tieude,
-          idcd: +value.idcd,
-          noidung: value.noidung,
+        this._api.post('api/loaichude/create-loaichude', {
+          tenchude: value.tenchude,         
         }).takeUntil(this.unsubscribe).subscribe((res) => {
           this.message = res;
           this.loaichudes.unshift(this.message);
@@ -101,7 +99,7 @@ export class LoaichudeComponent extends BaseComponent implements OnInit {
 
 
       Observable.combineLatest(
-        this._api.get('api/loaichude/get-by-id/' + id)
+        this._api.get('api/loaichude/get-by-id-loaichude/' + id)
       ).subscribe(
         res => {
           this.loaichude = res[0];
@@ -112,7 +110,7 @@ export class LoaichudeComponent extends BaseComponent implements OnInit {
             this.formData.controls['tenchude'].setValue(this.loaichude.tenchude);
             
             // this.formData.controls['noidung'].setValue(this.chude.noidung);
-            $(".modal-title").html("Sửa sản phẩm");
+            $(".modal-title").html("Sửa loại chủ đề");
             $('#formModal').modal('toggle');
             //  this.formData.reset();
           });

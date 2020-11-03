@@ -12,7 +12,10 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     {name:'Tin Tức',url:'',icon:'',childs:[{name:'Quản lý loai tin',url:'/quanly/loaitin'},
     {name:'Quản lý tin tức',url:'/quanly/tintuc'},  
     {name:'Quản lý chủ đề',url:'/quanly/chude'},
-    {name:'Quản lý loai chủ đề',url:'/quanly/loaichude'}]}
+    {name:'Quản lý loai chủ đề',url:'/quanly/loaichude'},
+    {name:'Quản lý thực đơn',url:'/quanly/thucdon'},
+    {name:'Quản lý thời khóa biểu',url:'/quanly/tkb'}
+  ]}
   ];
     constructor() { } 
 
