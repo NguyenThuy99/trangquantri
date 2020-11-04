@@ -27,6 +27,7 @@ export class TinTucComponent extends BaseComponent implements OnInit {
   tintucs: any;
   tintuc: any;
   loai: any
+  isCreate: boolean;
 
   @ViewChild(FileUpload, { static: false }) file_image: FileUpload;
   ngOnInit(): void {
@@ -105,6 +106,7 @@ export class TinTucComponent extends BaseComponent implements OnInit {
 
       $(".modal-title").html("Thêm sản phẩm");
       $('#formModal').modal('toggle');
+      this.isCreate = true;
 
     });
 
@@ -112,23 +114,37 @@ export class TinTucComponent extends BaseComponent implements OnInit {
   }
 
   onSubmitCreate(value: any) {
-
-    console.log(value);
     this.getEncodeFromImage(this.file_image).subscribe((data: any): void => {
       let data_image = data == '' ? null : data;
-      this._api.post('api/tintuc/create-tintuc', {
-        tieude: value.tieude,
-        idloai: +value.idloai,
-        mota: value.mota,
-        hinhanh: data_image,
 
-        noidung: value.noidung,
-      }).takeUntil(this.unsubscribe).subscribe((res) => {
-        this.message = res;
-        this.tintucs.unshift(this.message);
-        $("#formModal").modal('hide');
-        alert('Thêm thành công!');
-      });
+      if(this.isCreate) {
+        this._api.post('api/tintuc/create-tintuc', {
+          tieude: value.tieude,
+          idloai: value.idloai,
+          mota: value.mota,
+          hinhanh: data_image,
+          noidung: value.noidung,
+        }).takeUntil(this.unsubscribe).subscribe((res) => {
+          this.message = res;
+          this.tintucs.unshift(this.message);
+          $("#formModal").modal('hide');
+          alert('Thêm thành công!');
+        });
+      } else {
+        this._api.post('api/tintuc/update-tintuc', {
+          id: value.id,
+          tieude: value.tieude,
+          idloai: value.idloai,
+          mota: value.mota,
+          hinhanh: data_image,
+          noidung: value.noidung,
+        }).takeUntil(this.unsubscribe).subscribe((res) => {
+          this.message = res;
+          this.tintucs.unshift(this.message);
+          $("#formModal").modal('hide');
+          alert('Sửa thành công!');
+        });
+      }
     });
 
     // location.reload();
@@ -159,6 +175,8 @@ export class TinTucComponent extends BaseComponent implements OnInit {
           this.formData.controls['noidung'].setValue(this.tintuc.noidung);
           $(".modal-title").html("Sửa sản phẩm");
           $('#formModal').modal('toggle');
+          
+          this.isCreate = false;
           //  this.formData.reset();
 
 
