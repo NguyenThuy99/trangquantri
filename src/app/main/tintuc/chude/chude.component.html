@@ -49,9 +49,9 @@
                             <th style="width: 15%" class="text-center">
                                Nội dung
                             </th>
-                            <th style="width: 15%">
+                            <!-- <th style="width: 15%">
                                 Ngày đăng
-                            </th>
+                            </th> -->
                             <th style="width: 25%"> Thao tác
                             </th>
                         </tr>
@@ -71,10 +71,7 @@
                                 <td>
                                     {{catText(cd.noidung,150)}}
                                 </td>  
-                                <td>
-                                    {{cd.ngaydang}}
-                                </td>
-                                                          
+                                                 
                                 <td class="project-actions text-left">
                                     <a class="btn btn-primary btn-sm" (click)="view(cd.id)"  >
                                         <i class="fas fa-eye">
@@ -126,7 +123,7 @@
                     
                     <div class="form-group">
                         <label for=""> Danh mục*</label>
-                        <select formControlName="idloai" class="form-control">
+                        <select formControlName="idcd" class="form-control">
                             <ng-container *ngFor="let c of loaichude">
                                 <option [value]="c.id">{{ c.tenchude }}</option>
                             </ng-container>

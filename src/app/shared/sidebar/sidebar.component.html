@@ -21,7 +21,7 @@
             <ng-container  *ngFor="let m of mn.childs" >
               <li class="">
                 <a routerLink ="{{m.url}}">
-                  <i class="menu-icon fa fa-caret-right"></i>
+                  <i class="menu-icon fa fa-{{m.icon}}"></i>               
                    {{m.name}}
                 </a> 
                 <b class="arrow"></b>

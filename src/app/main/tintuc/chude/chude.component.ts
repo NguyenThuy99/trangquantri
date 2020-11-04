@@ -27,6 +27,7 @@ export class ChudeComponent extends BaseComponent implements OnInit {
   chudes: any;
   chude: any;
   loaichude: any
+  isCreate: boolean;
 
   @ViewChild(FileUpload, { static: false }) file_image: FileUpload;
   ngOnInit(): void {
@@ -93,46 +94,48 @@ export class ChudeComponent extends BaseComponent implements OnInit {
     )
   }
 
- 
-
-  
-
-
   //Show modal
   create() {
     setTimeout(() => {
       this.formData.controls['id'].setValue(null);
       this.formData.controls['tieude'].setValue(null);
-      this.formData.controls['noidung'].setValue(null);
-      
+      this.formData.controls['noidung'].setValue(null);     
       this.formData.controls['idcd'].setValue(null);
-
       $(".modal-title").html("Thêm sản phẩm");
       $('#formModal').modal('toggle');
-
+      this.isCreate = true;
     });
-
-
   }
 
   onSubmitCreate(value: any) {
-
-    console.log(value);
     this.getEncodeFromImage(this.file_image).subscribe((data: any): void => {
-      // let data_image = data == '' ? null : data;
-      this._api.post('api/chude/create-chude', {
-        tieude: value.tieude,
-        idcd: +value.idcd,
-        noidung: value.noidung,
-      }).takeUntil(this.unsubscribe).subscribe((res) => {
-        this.message = res;
-        this.chudes.unshift(this.message);
-        $("#formModal").modal('hide');
-        alert('Thêm thành công!');
-      });
+      let data_image = data == '' ? null : data;
+      if(this.isCreate) {
+        debugger
+        this._api.post('api/chude/create-chude', {
+          tieude: value.tieude,        
+          noidung: value.noidung, 
+          idcd: +value.idcd,         
+        }).takeUntil(this.unsubscribe).subscribe((res) => {
+          this.message = res;
+          this.chudes.unshift(this.message);
+          $("#formModal").modal('hide');
+          alert('Thêm thành công!');
+        });
+      } else {
+        this._api.post('api/chude/update-chude', {
+          id: +value.id,
+          tieude: value.tieude,        
+          noidung: value.noidung, 
+          idcd: +value.idcd,  
+        }).takeUntil(this.unsubscribe).subscribe((res) => {
+          this.message = res;
+          this.chudes.unshift(this.message);
+          $("#formModal").modal('hide');
+          alert('Sửa thành công!');
+        });
+      }
     });
-
-    // location.reload();
   }
   catText(text: string, limit: number): string {
     if (text.length > limit) {
@@ -141,11 +144,7 @@ export class ChudeComponent extends BaseComponent implements OnInit {
     return text;
   }
 
-
-
   update(id: any) {
-
-
     Observable.combineLatest(
       this._api.get('api/chude/get-by-id/' + id)
     ).subscribe(
@@ -155,13 +154,12 @@ export class ChudeComponent extends BaseComponent implements OnInit {
         this.idcd = this.chude.idcd;
         setTimeout(() => {
           this.formData.controls['id'].setValue(this.chude.id);
-          this.formData.controls['tieude'].setValue(this.chude.tieude);
-          
+          this.formData.controls['tieude'].setValue(this.chude.tieude);         
           this.formData.controls['noidung'].setValue(this.chude.noidung);
           $(".modal-title").html("Sửa sản phẩm");
           $('#formModal').modal('toggle');
           //  this.formData.reset();
-
+          this.isCreate = false;
 
         });
 

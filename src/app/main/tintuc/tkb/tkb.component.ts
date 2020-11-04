@@ -25,17 +25,15 @@ export class TkbComponent extends BaseComponent implements OnInit {
 
   tkbs: any;
   tkb: any;
-
+  isCreate: boolean;
 
   @ViewChild(FileUpload, { static: false }) file_image: FileUpload;
   ngOnInit(): void {
 
     this.formData = this.fb.group({
       id: [''],
-      ten: ['', Validators.required],
-     
-      hinhanh: [''],
-     
+      ten: ['', Validators.required],    
+      hinhanh: [''],     
     });
     Observable.combineLatest(
       this._api.get('api/tkb/get-all'),
@@ -44,11 +42,8 @@ export class TkbComponent extends BaseComponent implements OnInit {
       res => {
         this.tkbs = res[0];
         console.log(this.tkbs);
-
       }, err => { })  
   }
-
-
 
   view(id: any) {
     Observable.combineLatest(
@@ -59,9 +54,7 @@ export class TkbComponent extends BaseComponent implements OnInit {
         setTimeout(() => {
           this.formData.controls['id'].setValue(this.tkb.id);
           this.formData.controls['ten'].setValue(this.tkb.ten);
-          // this.formData.controls['hinhanh'].setValue(this.thucdon.hinhanh);
-        
-
+          // this.formData.controls['hinhanh'].setValue(this.thucdon.hinhanh);      
           $(".modal-title").html("Xem chi tiết thời khóa biểu");
           $('#formModal').modal('toggle');
           console.log(this.tkb)
@@ -88,32 +81,37 @@ export class TkbComponent extends BaseComponent implements OnInit {
       
       $(".modal-title").html("Thêm tkb");
       $('#formModal').modal('toggle');
-
+      this.isCreate = true;
     });
-
-
   }
 
   onSubmitCreate(value: any) {
-
-    console.log(value);
     this.getEncodeFromImage(this.file_image).subscribe((data: any): void => {
-     let data_image = data == '' ? null : data;
-      this._api.post('api/tkb/create-tkb', {
-        ten: value.ten,
-        
-        hinhanh: data_image,
+      let data_image = data == '' ? null : data;
 
-      
-      }).takeUntil(this.unsubscribe).subscribe((res) => {
-        this.message = res;
-        this.tkbs.unshift(this.message);
-        $("#formModal").modal('hide');
-        alert('Thêm thành công!');
-      });
+      if(this.isCreate) {
+        this._api.post('api/tkb/create-tkb', {
+          ten: value.ten,
+          hinhanh: data_image,
+        }).takeUntil(this.unsubscribe).subscribe((res) => {
+          this.message = res;
+          this.tkbs.unshift(this.message);
+          $("#formModal").modal('hide');
+          alert('Thêm thành công!');
+        });
+      } else {
+        this._api.post('api/tkb/update-tkb', {
+          id: value.id,
+          ten: value.ten,          
+          hinhanh: data_image,
+        }).takeUntil(this.unsubscribe).subscribe((res) => {
+          this.message = res;
+          this.tkbs.unshift(this.message);
+          $("#formModal").modal('hide');
+          alert('Sửa thành công!');
+        });
+      }
     });
-
-    // location.reload();
   }
   catText(text: string, limit: number): string {
     if (text.length > limit) {
@@ -122,26 +120,21 @@ export class TkbComponent extends BaseComponent implements OnInit {
     return text;
   }
 
-
-
   update(id: any) {
-
-
     Observable.combineLatest(
       this._api.get('api/tkb/get-by-id/' + id)
     ).subscribe(
       res => {
         this.tkb = res[0];
-        console.log(this.tkb);      
+        console.log(this.tkb);
         setTimeout(() => {
           this.formData.controls['id'].setValue(this.tkb.id);
           this.formData.controls['ten'].setValue(this.tkb.ten);
-          
-          $(".modal-title").html("Sửa tkb");
+          $(".modal-title").html("Sửa sản phẩm");
           $('#formModal').modal('toggle');
+          
+          this.isCreate = false;
           //  this.formData.reset();
-
-
         });
 
       }

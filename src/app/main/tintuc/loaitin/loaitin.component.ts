@@ -24,9 +24,9 @@ export class LoaitinComponent extends BaseComponent implements OnInit{
 
   loaitins: any;
   loaitin: any
-  
+  isCreate: boolean;
 
-  // @ViewChild(FileUpload, { static: false }) file_image: FileUpload;
+ @ViewChild(FileUpload, { static: false }) file_image: FileUpload;
   ngOnInit(): void {
 
     this.formData = this.fb.group({
@@ -87,73 +87,48 @@ export class LoaitinComponent extends BaseComponent implements OnInit{
         alert('Xóa thành công!');
 
       }
-
     )
-  
- 
   }
-
-  // update(id: any) {
-
-  //   Observable.combineLatest(
-  //     this._api.get('api/tintuc/get-by-id/' + id)
-  //   ).takeUntil(this.unsubscribe).subscribe(
-  //     res => {
-  //       this.tintuc = res[0];
-  //       console.log(this.tintuc);
-  //       setTimeout(() => {
-  //         $("#updateModal").modal("toggle");
-  //       });
-
-  //     }
-  //   )
-  // }
-
-  // updateLoaitin(id: any, value: any) {
-
-  //   Observable.combineLatest(
-  //     this._api.put('api/loaitin/update-loaitintuc' + id, {
-  //       tenloai:value.tenloai,      
-  //       mota: value.mota       
-  //     })
-  //   ).takeUntil(this.unsubscribe).subscribe(
-  //     res => {
-  //     }
-  //   )
-  // }
-
 
   //Show modal
   create() {
     setTimeout(() => {
       this.formData.controls['id'].setValue(null);
-      this.formData.controls['tenloai'].setValue(null); 
+      this.formData.controls['tenloai'].setValue(null);
       this.formData.controls['mota'].setValue(null);
-      $(".modal-title").html("Thêm sản phẩm");
+      $(".modal-title").html("Thêm loại tin");
       $('#formModal').modal('toggle');
-    
-  });
-   
-
+      this.isCreate = true;
+    });
   }
 
-  onSubmitCreate(value: any) {
-
-    console.log(value);
-    // this.getEncodeFromImage(this.file_image).subscribe((data: any): void => {
-    //  let data_image = data == '' ? null : data;
-    this._api.post('api/loaitin/create-loaitintuc', {
-      tenloai: value.tenloai,      
-      mota: value.mota
-    }).takeUntil(this.unsubscribe).subscribe((res) => {
-      this.message = res;
-      this.loaitins.unshift(this.message);
-      $("#formModal").modal('hide');   
-      alert('Thêm thành công!'); 
-    });
-
   
-   // location.reload();
+  onSubmitCreate(value: any) {
+    this.getEncodeFromImage(this.file_image).subscribe((data: any): void => {
+      let data_image = data == '' ? null : data;
+      if(this.isCreate) {
+        this._api.post('api/loaitin/create-loaitintuc', {
+          tenloai: value.tenloai,        
+          mota: value.mota,         
+        }).takeUntil(this.unsubscribe).subscribe((res) => {
+          this.message = res;
+          this.loaitins.unshift(this.message);
+          $("#formModal").modal('hide');
+          alert('Thêm thành công!');
+        });
+      } else {
+        this._api.post('api/loaitin/update-loaitintuc', {
+          id: value.id,
+          tenloai: value.tenloai,        
+          mota: value.mota,  
+        }).takeUntil(this.unsubscribe).subscribe((res) => {
+          this.message = res;
+          this.loaitins.unshift(this.message);
+          $("#formModal").modal('hide');
+          alert('Sửa thành công!');
+        });
+      }
+    });
   }
   catText(text: string, limit: number): string {
     if(text.length > limit) {
@@ -165,28 +140,26 @@ export class LoaitinComponent extends BaseComponent implements OnInit{
 
 
   update(id: any) {
-
-
     Observable.combineLatest(
-    this._api.get('api/loaitin/get-by-id-loaitin/'+id)
-  ).subscribe(
-    res => {
-      this.loaitin = res[0];
-      console.log(this.loaitin);
-      // this.idloai = this.tintuc.idloai;
-      setTimeout(() => {
-        this.formData.controls['id'].setValue(this.loaitin.id);
+      this._api.get('api/loaitin/get-by-id-loaitin/' + id)
+    ).subscribe(
+      res => {
+        this.loaitin = res[0];
+        console.log(this.loaitin);
+       
+        setTimeout(() => {
+          this.formData.controls['id'].setValue(this.loaitin.id);
         this.formData.controls['tenloai'].setValue(this.loaitin.tenloai);
         this.formData.controls['mota'].setValue(this.loaitin.mota);
+          $(".modal-title").html("Sửa sản phẩm");
+          $('#formModal').modal('toggle');
           
-        $(".modal-title").html("Sửa sản phẩm");
-        $('#formModal').modal('toggle');
-      //  this.formData.reset();
+          this.isCreate = false;
+          //  this.formData.reset();
+        });
 
-
-      });
-
-    }
-  )
+      }
+    )
+  }
 }
-}
+ 

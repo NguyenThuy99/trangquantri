@@ -44,6 +44,9 @@
                             <th style="width: 15%">
                                 Tiêu đề
                             </th>
+                            <th style="width: 15%">
+                                Hình ảnh
+                            </th>
                          
                             <th style="width: 25%"> Thao tác
                             </th>
@@ -58,6 +61,9 @@
                                 
                                 <td>
                                     {{td.tieude}}
+                                </td>
+                                <td>
+                                    <img src="{{td.hinhanh}}" alt="." style="width: 80px;">
                                 </td>
                                 <td class="project-actions text-left">
                                     <a class="btn btn-primary btn-sm" (click)="view(td.id)"  >
@@ -100,10 +106,17 @@
                     <div class="form-group">
                         <label for=""> Tiêu đề</label>
                         <input type="text" formControlName="tieude" class="form-control">
+                    </div> 
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label no-padding-right"> Hình ảnh</label>
+                    <div class="col-md-12">
+                        <p-fileUpload #file_image mode="advanced" [showUploadButton]="false" cancelLabel="Hủy" chooseLabel ="Chọn ảnh"   multiple="false" accept="image/*" maxFileSize="1000000">
+                            <ng-template pTemplate="content">
+                                <!-- <img *ngIf="user && user.image_url" style="height: 100px;width: 100px;" [src]="user.image_url"> -->
+                            </ng-template>
+                      </p-fileUpload>
                     </div>
-
-                   
-                  
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

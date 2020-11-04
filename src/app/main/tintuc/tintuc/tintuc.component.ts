@@ -50,18 +50,13 @@ export class TinTucComponent extends BaseComponent implements OnInit {
         console.log(this.tintucs);
 
       }, err => { })
-
-
     Observable.combineLatest(
-      this._api.get('api/loaitin/get-all-loai'),
-
-    ).takeUntil(this.unsubscribe).subscribe(
+      this._api.get('api/loaitin/get-all-loai'),).takeUntil(this.unsubscribe).subscribe(
       res => {
         this.loai = res[0];
         console.log(this.loai);
       }, err => { })
   }
-
 
 
   view(id: any) {
@@ -94,7 +89,6 @@ export class TinTucComponent extends BaseComponent implements OnInit {
       }
     )
   }
-
   //Show modal
   create() {
     setTimeout(() => {
@@ -104,13 +98,10 @@ export class TinTucComponent extends BaseComponent implements OnInit {
       this.formData.controls['mota'].setValue(null);
       this.formData.controls['idloai'].setValue(null);
 
-      $(".modal-title").html("Thêm sản phẩm");
+      $(".modal-title").html("Thêm tin tức");
       $('#formModal').modal('toggle');
       this.isCreate = true;
-
     });
-
-
   }
 
   onSubmitCreate(value: any) {
@@ -159,8 +150,6 @@ export class TinTucComponent extends BaseComponent implements OnInit {
 
 
   update(id: any) {
-
-
     Observable.combineLatest(
       this._api.get('api/tintuc/get-by-id/' + id)
     ).subscribe(
@@ -178,8 +167,6 @@ export class TinTucComponent extends BaseComponent implements OnInit {
           
           this.isCreate = false;
           //  this.formData.reset();
-
-
         });
 
       }

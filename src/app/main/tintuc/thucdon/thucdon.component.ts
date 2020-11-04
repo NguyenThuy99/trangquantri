@@ -25,17 +25,15 @@ export class ThucdonComponent extends BaseComponent implements OnInit {
 
   thucdons: any;
   thucdon: any;
-
+  isCreate: boolean;
 
   @ViewChild(FileUpload, { static: false }) file_image: FileUpload;
   ngOnInit(): void {
 
     this.formData = this.fb.group({
       id: [''],
-      tieude: ['', Validators.required],
-     
-      hinhanh: [''],
-     
+      tieude: ['', Validators.required],     
+      hinhanh: ['']    
     });
     Observable.combineLatest(
       this._api.get('api/thucdon/get-all'),
@@ -48,8 +46,6 @@ export class ThucdonComponent extends BaseComponent implements OnInit {
       }, err => { })  
   }
 
-
-
   view(id: any) {
     Observable.combineLatest(
       this._api.get('api/thucdon/get-by-id/' + id)
@@ -59,9 +55,6 @@ export class ThucdonComponent extends BaseComponent implements OnInit {
         setTimeout(() => {
           this.formData.controls['id'].setValue(this.thucdon.id);
           this.formData.controls['tieude'].setValue(this.thucdon.tieude);
-          // this.formData.controls['hinhanh'].setValue(this.thucdon.hinhanh);
-        
-
           $(".modal-title").html("Xem chi tiết thực đơn");
           $('#formModal').modal('toggle');
           console.log(this.thucdon)
@@ -89,35 +82,39 @@ export class ThucdonComponent extends BaseComponent implements OnInit {
     setTimeout(() => {
       this.formData.controls['id'].setValue(null);
       this.formData.controls['tieude'].setValue(null);
-      
-      $(".modal-title").html("Thêm sản phẩm");
+      $(".modal-title").html("Thêm thực đơn");
       $('#formModal').modal('toggle');
-
+      this.isCreate = true;
     });
-
-
   }
 
   onSubmitCreate(value: any) {
-
-    console.log(value);
     this.getEncodeFromImage(this.file_image).subscribe((data: any): void => {
       let data_image = data == '' ? null : data;
-      this._api.post('api/thucdon/create-thucdon', {
-        tieude: value.tieude,
-        
-        hinhanh: data_image,
 
-      
-      }).takeUntil(this.unsubscribe).subscribe((res) => {
-        this.message = res;
-        this.thucdons.unshift(this.message);
-        $("#formModal").modal('hide');
-        alert('Thêm thành công!');
-      });
+      if(this.isCreate) {
+        this._api.post('api/thucdon/create-thucdon', {
+          tieude: value.tieude,
+          hinhanh: data_image,
+        }).takeUntil(this.unsubscribe).subscribe((res) => {
+          this.message = res;
+          this.thucdons.unshift(this.message);
+          $("#formModal").modal('hide');
+          alert('Thêm thành công!');
+        });
+      } else {
+        this._api.post('api/thucdon/update-thucdon', {
+          id: value.id,
+          tieude: value.tieude,          
+          hinhanh: data_image,
+        }).takeUntil(this.unsubscribe).subscribe((res) => {
+          this.message = res;
+          this.thucdons.unshift(this.message);
+          $("#formModal").modal('hide');
+          alert('Sửa thành công!');
+        });
+      }
     });
-
-    // location.reload();
   }
   catText(text: string, limit: number): string {
     if (text.length > limit) {
@@ -126,26 +123,21 @@ export class ThucdonComponent extends BaseComponent implements OnInit {
     return text;
   }
 
-
-
   update(id: any) {
-
-
     Observable.combineLatest(
       this._api.get('api/thucdon/get-by-id/' + id)
     ).subscribe(
       res => {
         this.thucdon = res[0];
-        console.log(this.thucdon);      
+        console.log(this.thucdon);
         setTimeout(() => {
           this.formData.controls['id'].setValue(this.thucdon.id);
           this.formData.controls['tieude'].setValue(this.thucdon.tieude);
-          
-          $(".modal-title").html("Sửa thực đơn");
+          $(".modal-title").html("Sửa sản phẩm");
           $('#formModal').modal('toggle');
+          
+          this.isCreate = false;
           //  this.formData.reset();
-
-
         });
 
       }
