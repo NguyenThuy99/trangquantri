@@ -25,10 +25,10 @@ export class AuthenticationService {
     }
 
     login(usename: string, password: string) {
-        debugger;
-        return this.http.post<any>(`${environment.apiUrl}/api/taikhoan/authenticate`, { usename, password })
+        
+        return this.http.post<any>(`${environment.apiUrl}api/taikhoan/authenticate`, { usename, password })
             .pipe(map(user => {
-                debugger;
+                
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
                 this.userSubject.next(user);

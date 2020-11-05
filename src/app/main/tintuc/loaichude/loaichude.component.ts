@@ -15,12 +15,14 @@ export class LoaichudeComponent extends BaseComponent implements OnInit {
   constructor(injector: Injector, private fb: FormBuilder) {
     super(injector);
   }
+  term : any;
   formData: any;
   message: any;
   tenchude: any;
   loaichudes: any;
   loaichude: any;
   isCreate: boolean;
+  p: number = 1;
   @ViewChild(FileUpload, { static: false }) file_image: FileUpload;
   ngOnInit(): void {
     debugger;

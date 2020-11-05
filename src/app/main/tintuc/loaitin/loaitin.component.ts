@@ -14,7 +14,7 @@ export class LoaitinComponent extends BaseComponent implements OnInit{
   constructor(injector: Injector, private fb: FormBuilder) {
     super(injector);
   }
-
+  term : any;
   formData: any;
   message: any;
 
@@ -25,6 +25,7 @@ export class LoaitinComponent extends BaseComponent implements OnInit{
   loaitins: any;
   loaitin: any
   isCreate: boolean;
+  p: number = 1;
 
  @ViewChild(FileUpload, { static: false }) file_image: FileUpload;
   ngOnInit(): void {
@@ -47,15 +48,7 @@ export class LoaitinComponent extends BaseComponent implements OnInit{
       }, err => { })
 
 
-      // Observable.combineLatest(
-      //   this._api.get('api/loaitin/get-all-loai'),
-  
-      // ).takeUntil(this.unsubscribe).subscribe(
-      //   res => {
-      //     this.loai = res[0];
-      //     console.log(this.loai);
-  
-      //   }, err => { })
+      
   }
 
     

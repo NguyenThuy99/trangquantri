@@ -14,7 +14,7 @@ export class TkbComponent extends BaseComponent implements OnInit {
   constructor(injector: Injector, private fb: FormBuilder) {
     super(injector);
   }
-
+  term : any;
   formData: any;
   message: any;
 
@@ -26,7 +26,7 @@ export class TkbComponent extends BaseComponent implements OnInit {
   tkbs: any;
   tkb: any;
   isCreate: boolean;
-
+  p: number = 1;
   @ViewChild(FileUpload, { static: false }) file_image: FileUpload;
   ngOnInit(): void {
 

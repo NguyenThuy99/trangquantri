@@ -8,10 +8,10 @@
                     <h1>Quản lý tin tức</h1>
                 </div>
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
+                    <!-- <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
                         <li class="breadcrumb-item active">Sản phẩm</li>
-                    </ol>
+                    </ol> -->
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -25,14 +25,9 @@
             <div class="card-header">
 
                 <button class="btn btn-success btn-sm" (click)="create()">Thêm sản phẩm</button>
-                <!-- <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                        <i class="fas fa-minus"></i></button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
-                        title="Remove">
-                        <i class="fas fa-times"></i></button>
-                </div> -->
+                <br>
+                <input type="text"class="col-md-3 from-control" [(ngModel)]="term" placeholder="Search...">
+                
             </div>
             <div class="card-body p-0">
                 <table class="table table-striped projects">
@@ -58,7 +53,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <ng-container *ngFor="let item of tintucs  ;
+                        <ng-container *ngFor="let item of tintucs | filter:term | paginate: { itemsPerPage: 10, currentPage: p } ;
                                 let i = index">
                             <tr>
                                 <td>
@@ -81,16 +76,16 @@
                                
                                 <td class="project-actions text-left">
                                     <a class="btn btn-primary btn-sm" (click)="view(item.id)"  >
-                                        <i class="fas fa-eye">
+                                        <i class="fa fa-eye">
                                         </i>
                                         View
                                     </a>
                                     <button class="btn btn-info btn-sm" (click)="update(item.id)">
-                                        <i class="fas fa-bath"></i>
+                                        <i class="fa fa-pencil"></i>
                                         Edit
                                     </button>
                                     <button class="btn btn-danger btn-sm" (click)="delete(item.id)">
-                                        <i class="fas fa-trash">
+                                        <i class="fa fa-trash">
                                         </i>
                                         Delete
                                     </button>
@@ -100,9 +95,11 @@
                     </tbody>
                 </table>
             </div>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
     </section>
 </div>
+
 
 <div class="modal fade" id="formModal">
     <div class="modal-dialog modal-lg">
@@ -160,68 +157,3 @@
 
 
 
-<!-- <div class="modal fade" id="updateModal">
-        <div class="modal-dialog modal-lg">
-       <form [formGroup]="formData" (ngSubmit)="updateProduct(product.product_id,formData.value)">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Thêm sản phẩm</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="form-group">
-               <label for=""> Tên sản phẩm *</label>
-               <input type="text" formControlName="name" [value]="product.name" class="form-control" >
-             </div>
-             <div class="row col-md-12">
-                <div class="form-group col-md-4">
-               <label for=""> Số lượng *</label>
-               <input type="number" formControlName="quantity"[ value]="product.quantity" class="form-control" >
-             </div>
-              <div class="form-group col-md-4">
-               <label for=""> Giá *</label>
-            <input type="number" formControlName="price" [value]="product.price" class="form-control" >
-             </div>
-              <div class="form-group col-md-4">
-               <label for=""> Giá khuyến mại *</label>
-               <input type="number" formControlName="promotion_price" [value]="promotion_price" class="form-control" >
-             </div>
-             </div>
-              <div class="form-group">
-               <label for=""> Mô tả *</label>
-                <textarea  formControlName="description" class="form-control" cols="6" rows="5">{{ product.description }}</textarea>
-             </div>
-              <div class="form-group">
-               <label for=""> Chi tiết *</label>
-               <textarea  formControlName="detail" class="form-control" cols="6" rows="5"></textarea>
-               {{ product.detail }}
-             </div>
-              <div class="form-group">
-               <label for="">Ảnh *</label>
-               <input type="file" formControlName="image" class="form-control" >
-             </div>
-              <div class="form-group">
-               <label for=""> Danh mục*</label>
-             <select formControlName="category_id" class="form-control">
-               <option selected value="93b25b4e-7e6f-4acb-aa26-7c0e456ff94d">Iphone</option>
-               <option value="2">SamSung </option>
-             </select>
-             </div>
-               <div class="form-group">
-               <label for="">Trạng thái *</label>
-             <select formControlName="status" class="form-control">
-               <option value=0 >Ẩn </option>
-               <option selected  value=1>Hiện </option>
-             </select>
-             </div>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-         </form>
-      </div>
-      </div>  -->

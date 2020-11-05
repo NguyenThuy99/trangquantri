@@ -1,5 +1,6 @@
 import { Component, OnInit,Injector, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { FileUpload } from 'primeng/fileupload';
 import { Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/lib/base-component';
@@ -11,7 +12,7 @@ declare var $: any;
 })
 export class QuangcaoComponent extends BaseComponent implements OnInit {
 
-  constructor(injector: Injector, private fb: FormBuilder) {
+  constructor(injector: Injector, private fb: FormBuilder,  private _sanitizer: DomSanitizer) {
     super(injector);
   }
 
@@ -43,7 +44,11 @@ export class QuangcaoComponent extends BaseComponent implements OnInit {
     ).takeUntil(this.unsubscribe).subscribe(
       res => {
         this.quangcaos = res[0];
+        this.quangcao.map((res: any) => {
+          res.video = this._sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + res.video);
+          return res;
         console.log(this.quangcaos);
+        });
 
       }, err => { })
 

@@ -65,7 +65,12 @@
                                     {{qc.tieude}}
                                 </td>
                                 <td>
-                                    {{qc.video}}
+                                    <iframe style="border:1px solid #ccc;border-radius:10px;" width="200px" height="250px"
+										[src]="qc.video" frameborder="0"
+										allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+										allowfullscreen="">
+									</iframe>
+                                    
                                 </td>
 
                                 <td class="project-actions text-left">

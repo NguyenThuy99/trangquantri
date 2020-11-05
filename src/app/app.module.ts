@@ -17,6 +17,7 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +27,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgxPaginationModule,
     NgbModule,FormsModule,ReactiveFormsModule,HttpClientModule
   ],
   providers: [],

@@ -11,6 +11,9 @@ import { LoaichudeComponent } from './loaichude/loaichude.component';
 import { ThucdonComponent } from './thucdon/thucdon.component';
 import { TkbComponent } from './tkb/tkb.component';
 import { QuangcaoComponent } from './quangcao/quangcao.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 const routes: Routes = [
   {
@@ -46,6 +49,8 @@ const routes: Routes = [
   declarations: [TinTucComponent, LoaitinComponent,ChudeComponent,LoaichudeComponent, ThucdonComponent, TkbComponent, QuangcaoComponent],
   imports: [
     CommonModule,
+    NgxPaginationModule,
+     Ng2SearchPipeModule,
     SharedModule,
     RouterModule.forChild(routes)
     

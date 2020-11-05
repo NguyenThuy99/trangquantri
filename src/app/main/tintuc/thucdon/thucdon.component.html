@@ -25,14 +25,8 @@
             <div class="card-header">
 
                 <button class="btn btn-success btn-sm" (click)="create()">Thêm thực đơn</button>
-                <!-- <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                        <i class="fas fa-minus"></i></button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
-                        title="Remove">
-                        <i class="fas fa-times"></i></button>
-                </div> -->
+                <br>
+                <input type="text"class="col-md-3 from-control" [(ngModel)]="term" placeholder="Search...">
             </div>
             <div class="card-body p-0">
                 <table class="table table-striped projects">
@@ -53,7 +47,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <ng-container *ngFor="let td of thucdons; let i = index">
+                        <ng-container *ngFor="let td of thucdons| filter:term | paginate: { itemsPerPage: 10, currentPage: p } ;
+                         let i = index">
                             <tr>
                                 <td>
                                     {{ i +  1}}
@@ -67,17 +62,16 @@
                                 </td>
                                 <td class="project-actions text-left">
                                     <a class="btn btn-primary btn-sm" (click)="view(td.id)"  >
-                                        <i class="fas fa-eye">
+                                        <i class="fa fa-eye">
                                         </i>
                                         View
                                     </a>
                                     <button class="btn btn-info btn-sm" (click)="update(td.id)">
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
+                                        <i class="fa fa-pencil"></i>
                                         Edit
                                     </button>
                                     <button class="btn btn-danger btn-sm" (click)="delete(td.id)">
-                                        <i class="fas fa-trash">
+                                        <i class="fa fa-trash">
                                         </i>
                                         Delete
                                     </button>
@@ -87,6 +81,7 @@
                     </tbody>
                 </table>
             </div>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
     </section>
 </div>

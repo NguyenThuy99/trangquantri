@@ -14,7 +14,7 @@ export class TinTucComponent extends BaseComponent implements OnInit {
   constructor(injector: Injector, private fb: FormBuilder) {
     super(injector);
   }
-
+  term : any;
   formData: any;
   message: any;
   tieude: any;
@@ -28,6 +28,7 @@ export class TinTucComponent extends BaseComponent implements OnInit {
   tintuc: any;
   loai: any
   isCreate: boolean;
+  p: number = 1;
 
   @ViewChild(FileUpload, { static: false }) file_image: FileUpload;
   ngOnInit(): void {

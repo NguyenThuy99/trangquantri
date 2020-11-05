@@ -14,7 +14,7 @@ export class ThucdonComponent extends BaseComponent implements OnInit {
   constructor(injector: Injector, private fb: FormBuilder) {
     super(injector);
   }
-
+  term : any;
   formData: any;
   message: any;
 
@@ -26,7 +26,7 @@ export class ThucdonComponent extends BaseComponent implements OnInit {
   thucdons: any;
   thucdon: any;
   isCreate: boolean;
-
+  p: number = 1;
   @ViewChild(FileUpload, { static: false }) file_image: FileUpload;
   ngOnInit(): void {
 

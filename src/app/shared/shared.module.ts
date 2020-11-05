@@ -10,6 +10,8 @@ import {FileUploadModule} from 'primeng/fileupload';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { FileNotFoundComponent } from './file-not-found/file-not-found.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination/dist/ngx-pagination.module';
+import { Ng2SearchPipe } from 'ng2-search-filter';
 @NgModule({
   declarations: [UnauthorizedComponent, FileNotFoundComponent],
   imports: [
@@ -22,7 +24,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DropdownModule,
     FileUploadModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+
   ],
   exports: [
     ReactiveFormsModule,
@@ -34,7 +37,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CalendarModule,
     DropdownModule,
     FileUploadModule,
-    NgbModule 
+    NgbModule,
+    
+
   ],
 })
 export class SharedModule { }
