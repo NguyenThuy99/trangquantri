@@ -32,16 +32,13 @@ export class TinTucComponent extends BaseComponent implements OnInit {
 
   @ViewChild(FileUpload, { static: false }) file_image: FileUpload;
   ngOnInit(): void {
-
     this.formData = this.fb.group({
       id: [''],
       tieude: ['', Validators.required],
       idloai: [''],
       mota: [''],
       hinhanh: [''],
-      // ngaydang: [''],
       noidung: ['']
-
     });
     Observable.combineLatest(
       this._api.get('api/tintuc/get-all'),
@@ -49,7 +46,6 @@ export class TinTucComponent extends BaseComponent implements OnInit {
       res => {
         this.tintucs = res[0];
         console.log(this.tintucs);
-
       }, err => { })
     Observable.combineLatest(
       this._api.get('api/loaitin/get-all-loai'),).takeUntil(this.unsubscribe).subscribe(
@@ -98,7 +94,6 @@ export class TinTucComponent extends BaseComponent implements OnInit {
       this.formData.controls['noidung'].setValue(null);
       this.formData.controls['mota'].setValue(null);
       this.formData.controls['idloai'].setValue(null);
-
       $(".modal-title").html("Thêm tin tức");
       $('#formModal').modal('toggle');
       this.isCreate = true;
@@ -147,7 +142,6 @@ export class TinTucComponent extends BaseComponent implements OnInit {
     }
     return text;
   }
-
 
 
   update(id: any) {
