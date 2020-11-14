@@ -54,8 +54,6 @@ export class TinTucComponent extends BaseComponent implements OnInit {
         console.log(this.loai);
       }, err => { })
   }
-
-
   view(id: any) {
     Observable.combineLatest(
       this._api.get('api/tintuc/get-by-id/' + id)

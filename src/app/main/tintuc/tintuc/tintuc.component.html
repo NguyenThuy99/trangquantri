@@ -1,33 +1,22 @@
-<!-- Content Wrapper. Contains page content -->
+
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1>Quản lý tin tức</h1>
                 </div>
-                <div class="col-sm-6">
-                    <!-- <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Sản phẩm</li>
-                    </ol> -->
+                <div class="col-sm-6">       
                 </div>
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
-
-    <!-- Main content -->
     <section class="content">
-
-        <!-- Default box -->
         <div class="card">
             <div class="card-header">
-
                 <button class="btn btn-success btn-sm" (click)="create()">Thêm sản phẩm</button>
                 <br>
-                <input type="text"class="col-md-3 from-control" [(ngModel)]="term" placeholder="Search...">
-                
+                <input type="text"class="col-md-3 from-control" [(ngModel)]="term" placeholder="Search...">                
             </div>
             <div class="card-body p-0">
                 <table class="table table-striped projects">
@@ -71,9 +60,7 @@
                                 </td>
                                 <td>
                                     {{catText(item.mota,100)}}
-                                </td>
-                               
-                               
+                                </td>                                                             
                                 <td class="project-actions text-left">
                                     <a class="btn btn-primary btn-sm" (click)="view(item.id)"  >
                                         <i class="fa fa-eye">
@@ -99,8 +86,6 @@
         </div>
     </section>
 </div>
-
-
 <div class="modal fade" id="formModal">
     <div class="modal-dialog modal-lg">
         <form [formGroup]="formData" (ngSubmit)="onSubmitCreate(formData.value)">
