@@ -41,8 +41,7 @@ export const mainRoutes: Routes = [
           import('./tintuc/tintuc.module').then((m) => m.TintucModule),
         canActivate: [RoleGuard],
         data: { roles: [Role.Admin, Role.User] },
-      },
-      
+      },      
     ],
   },
 ];

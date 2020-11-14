@@ -140,8 +140,6 @@ export class TinTucComponent extends BaseComponent implements OnInit {
     }
     return text;
   }
-
-
   update(id: any) {
     Observable.combineLatest(
       this._api.get('api/tintuc/get-by-id/' + id)

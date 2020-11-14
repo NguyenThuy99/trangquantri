@@ -88,7 +88,7 @@ export class BaseComponent {
           this._api = injector.get(ApiService);
           this._route = injector.get(ActivatedRoute);
       }
-   public getEncodeFromImage(fileUpload: FileUpload) {
+   public getEncodeFromImage(fileUpload: FileUpload) {//lấy ảnh 
         if (fileUpload) {
           if (fileUpload.files == null || fileUpload.files.length == 0) {
             return observableOf('');
