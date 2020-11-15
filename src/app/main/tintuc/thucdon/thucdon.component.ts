@@ -133,7 +133,7 @@ export class ThucdonComponent extends BaseComponent implements OnInit {
         setTimeout(() => {
           this.formData.controls['id'].setValue(this.thucdon.id);
           this.formData.controls['tieude'].setValue(this.thucdon.tieude);
-          $(".modal-title").html("Sửa sản phẩm");
+          $(".modal-title").html("Sửa thực đơn");
           $('#formModal').modal('toggle');
           
           this.isCreate = false;

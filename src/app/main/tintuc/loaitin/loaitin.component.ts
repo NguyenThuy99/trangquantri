@@ -45,14 +45,8 @@ export class LoaitinComponent extends BaseComponent implements OnInit{
         this.loaitins = res[0];
         console.log(this.loaitins);
 
-      }, err => { })
-
-
-      
-  }
-
-    
-
+      }, err => { })      
+  }  
   view(id: any) {
     Observable.combineLatest(
       this._api.get('api/loaitin/get-by-id-loaitin/' + id)
@@ -63,7 +57,7 @@ export class LoaitinComponent extends BaseComponent implements OnInit{
           this.formData.controls['id'].setValue(this.loaitin.id);
           this.formData.controls['tenloai'].setValue(this.loaitin.tenloai);          
           this.formData.controls['mota'].setValue(this.loaitin.mota);
-          $(".modal-title").html("Xem chi tiết sản phẩm");
+          $(".modal-title").html("Xem chi tiết loại tin");
           $('#formModal').modal('toggle');
         console.log(this.loaitin)
       });
@@ -130,23 +124,19 @@ export class LoaitinComponent extends BaseComponent implements OnInit{
     return text;
   }
 
-
-
   update(id: any) {
     Observable.combineLatest(
       this._api.get('api/loaitin/get-by-id-loaitin/' + id)
     ).subscribe(
       res => {
         this.loaitin = res[0];
-        console.log(this.loaitin);
-       
+        console.log(this.loaitin);      
         setTimeout(() => {
           this.formData.controls['id'].setValue(this.loaitin.id);
         this.formData.controls['tenloai'].setValue(this.loaitin.tenloai);
         this.formData.controls['mota'].setValue(this.loaitin.mota);
-          $(".modal-title").html("Sửa sản phẩm");
-          $('#formModal').modal('toggle');
-          
+          $(".modal-title").html("Sửa loại tin");
+          $('#formModal').modal('toggle');         
           this.isCreate = false;
           //  this.formData.reset();
         });

@@ -71,7 +71,7 @@ export class LoaichudeComponent extends BaseComponent implements OnInit {
         this.formData.controls['id'].setValue(null);
         this.formData.controls['tenchude'].setValue(null);
         
-        $(".modal-title").html("Thêm sản phẩm");
+        $(".modal-title").html("Thêm loại chủ đề");
         $('#formModal').modal('toggle');
         this.isCreate = true;
       });
@@ -120,7 +120,7 @@ export class LoaichudeComponent extends BaseComponent implements OnInit {
           setTimeout(() => {
             this.formData.controls['id'].setValue(this.loaichude.id);
           this.formData.controls['tenchude'].setValue(this.loaichude.tenchude);         
-            $(".modal-title").html("Sửa sản phẩm");
+            $(".modal-title").html("Sửa loại chủ đề");
             $('#formModal').modal('toggle');
             
             this.isCreate = false;

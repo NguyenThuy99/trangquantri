@@ -23,26 +23,26 @@ export class AuthenticationService {
         return this.userSubject.value;
        
     }
-
+// truyen và user vs pass
     login(usename: string, password: string) {
-        
         return this.http.post<any>(`${environment.apiUrl}api/taikhoan/authenticate`, { usename, password })
             .pipe(map(user => {
                 
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
+                //lưu vào loca trên trình duyệt, chuyển sang json và lưu vào header
                 localStorage.setItem('user', JSON.stringify(user));
                 this.userSubject.next(user);
                 return user;
             }));
     }
-
+// đăng xuất
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('user');
         this.userSubject.next(null);
         this.router.navigate(['/login']);
     }
-
+//xóa
     remove() {
         // remove user from local storage to log user out
         localStorage.removeItem('user');

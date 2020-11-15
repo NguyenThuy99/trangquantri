@@ -13,7 +13,7 @@ export class ApiService {
   }
   public host = environment.apiUrl;
   constructor(private _http: HttpClient, public router: Router) {}
-
+//đẩy dữ lên
   post(url: string, obj: any) {
     const body = JSON.stringify(obj);
     let cloneHeader: any = {};
@@ -27,7 +27,7 @@ export class ApiService {
         })
       );      
   }
-
+//lấy dữ liệu về
   get(url: string) {
     // let cloneHeader: any = {};
     // cloneHeader['Content-Type'] = 'application/json';

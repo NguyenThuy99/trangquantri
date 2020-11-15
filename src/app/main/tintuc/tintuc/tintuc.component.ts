@@ -67,7 +67,7 @@ export class TinTucComponent extends BaseComponent implements OnInit {
           this.formData.controls['mota'].setValue(this.tintuc.mota);
           this.formData.controls['idloai'].setValue(this.tintuc.idloai);
 
-          $(".modal-title").html("Xem chi tiết sản phẩm");
+          $(".modal-title").html("Xem chi tiết tin tức");
           $('#formModal').modal('toggle');
           console.log(this.tintuc)
         });
@@ -101,9 +101,10 @@ export class TinTucComponent extends BaseComponent implements OnInit {
   onSubmitCreate(value: any) {
     this.getEncodeFromImage(this.file_image).subscribe((data: any): void => {
       let data_image = data == '' ? null : data;
-
+//gọi api với pt là post 
       if(this.isCreate) {
         this._api.post('api/tintuc/create-tintuc', {
+          //giá trị bên api bằng gtri truyen vao
           tieude: value.tieude,
           idloai: value.idloai,
           mota: value.mota,
@@ -116,6 +117,7 @@ export class TinTucComponent extends BaseComponent implements OnInit {
           alert('Thêm thành công!');
         });
       } else {
+        //truyền api cái ib chưa tin tức ý
         this._api.post('api/tintuc/update-tintuc', {
           id: value.id,
           tieude: value.tieude,
@@ -153,7 +155,7 @@ export class TinTucComponent extends BaseComponent implements OnInit {
           this.formData.controls['tieude'].setValue(this.tintuc.tieude);
           this.formData.controls['mota'].setValue(this.tintuc.mota);
           this.formData.controls['noidung'].setValue(this.tintuc.noidung);
-          $(".modal-title").html("Sửa sản phẩm");
+          $(".modal-title").html("Sửa tin tức");
           $('#formModal').modal('toggle');
           
           this.isCreate = false;

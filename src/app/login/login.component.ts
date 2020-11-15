@@ -59,10 +59,12 @@ export class LoginComponent implements OnInit {
     this.authenticationService
       .login(this.f.usename.value, this.f.password.value)
       .pipe(first())
+      //đúng chuyển hướng
       .subscribe(
         (data) => {
           this.router.navigate([this.returnUrl]);
         },
+        //sai chuyen  sang cái khác
         (error) => {
           this.error = error;
           this.loading = false;   

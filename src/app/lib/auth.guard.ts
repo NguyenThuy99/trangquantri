@@ -8,7 +8,7 @@ export class AuthGuard implements CanActivate {
         private router: Router,
         private authenticationService: AuthenticationService
     ) { }
-
+// chuyển đường dẫn đến trang login
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const user = this.authenticationService.userValue;
         if (user) {
@@ -26,7 +26,7 @@ export class RoleGuard implements CanActivate {
         private router: Router,
         private authenticationService: AuthenticationService
     ) { }
-
+// k nhận được trang đó
     canActivate(route: ActivatedRouteSnapshot) {
         const user = this.authenticationService.userValue;
         if (route.data.roles && route.data.roles.indexOf(user.role) === -1) {

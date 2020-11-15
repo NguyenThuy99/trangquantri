@@ -9,7 +9,7 @@
                 </div>
                
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
 
     <!-- Main content -->
@@ -19,7 +19,7 @@
         <div class="card">
             <div class="card-header">
 
-                <button class="btn btn-success btn-sm" (click)="create()">Thêm chủ đề</button>
+                <button class="btn btn-success btn-sm" (click)="create()">Thêm loại chủ đề</button>
                 <br>
                 <input type="text"class="col-md-3 from-control" [(ngModel)]="term" placeholder="Search...">
             </div>
@@ -80,7 +80,7 @@
         <form [formGroup]="formData" (ngSubmit)="onSubmitCreate(formData.value)">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Thêm chủ đề</h4>
+                    <h4 class="modal-title">Thêm loại chủ đề</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

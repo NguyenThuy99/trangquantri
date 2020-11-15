@@ -101,7 +101,7 @@ export class ChudeComponent extends BaseComponent implements OnInit {
       this.formData.controls['tieude'].setValue(null);
       this.formData.controls['noidung'].setValue(null);     
       this.formData.controls['idcd'].setValue(null);
-      $(".modal-title").html("Thêm sản phẩm");
+      $(".modal-title").html("Thêm chủ đề");
       $('#formModal').modal('toggle');
       this.isCreate = true;
     });
@@ -156,7 +156,7 @@ export class ChudeComponent extends BaseComponent implements OnInit {
           this.formData.controls['id'].setValue(this.chude.id);
           this.formData.controls['tieude'].setValue(this.chude.tieude);         
           this.formData.controls['noidung'].setValue(this.chude.noidung);
-          $(".modal-title").html("Sửa sản phẩm");
+          $(".modal-title").html("Sửa chủ đề");
           $('#formModal').modal('toggle');
           //  this.formData.reset();
           this.isCreate = false;

@@ -130,7 +130,7 @@ export class TkbComponent extends BaseComponent implements OnInit {
         setTimeout(() => {
           this.formData.controls['id'].setValue(this.tkb.id);
           this.formData.controls['ten'].setValue(this.tkb.ten);
-          $(".modal-title").html("Sửa sản phẩm");
+          $(".modal-title").html("Sửa tkb");
           $('#formModal').modal('toggle');
           
           this.isCreate = false;
